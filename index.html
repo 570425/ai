@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 工作術課前問卷</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #202124;
+      font-size: 2.2em;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    form {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-size: 1.1em;
+      color: #202124;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      font-size: 1em;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #1a73e8;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+    }
+
+    .choice-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-left: 5px; /* Slight indent */
+    }
+
+    .choice-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .choice-item input[type="radio"],
+    .choice-item input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.2); /* Make radio/checkbox slightly larger */
+    }
+
+    .choice-item label {
+      margin-bottom: 0;
+      font-size: 1em;
+      font-weight: normal;
+      color: #3c4043;
+      cursor: pointer;
+    }
+
+    .scale-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding: 0 5px; /* Add some padding for alignment */
+    }
+
+    .scale-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1; /* Distribute space evenly */
+      text-align: center;
+    }
+    
+    .scale-item input[type="radio"] {
+      margin-bottom: 5px;
+      transform: scale(1.2);
+    }
+
+    .scale-item label {
+      margin-bottom: 0;
+      font-size: 0.95em;
+      font-weight: normal;
+      color: #3c4043;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #1a73e8;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 30px;
+      width: auto;
+      min-width: 120px;
+      transition: background-color 0.3s ease;
+      display: block; /* Make button full width if needed, or inline-block for specific width */
+      margin-left: auto; /* Push button to the right */
+      margin-right: auto; /* Center button if it doesn't take full width */
+    }
+
+    button:hover {
+      background-color: #155bb5;
+    }
+
+    .result {
+      margin-top: 30px;
+      background-color: #e8f0fe;
+      border: 1px solid #d2e3fc;
+      border-radius: 8px;
+      padding: 20px;
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+      display: none; /* Initially hidden */
+      color: #202124;
+    }
+
+    .result h3 {
+      color: #1a73e8;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 1.4em;
+      text-align: center;
+    }
+
+    .result p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .result p strong {
+      color: #3c4043;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AI 工作術課前問卷</h1>
+
+  <form id="aiForm">
+    <div class="form-group">
+      <label for="name">請填寫您的姓名</label>
+      <input type="text" id="name" name="name" required placeholder="請輸入您的姓名">
+    </div>
+
+    <div class="form-group">
+      <label>請選擇您的職位</label>
+      <div class="choice-group">
+        <div class="choice-item">
+          <input type="radio" id="roleEngineer" name="role" value="工程師" required>
+          <label for="roleEngineer">工程師</label>
+        </div>
+        <div class="choice-item">
+          <input type="radio" id="roleManager" name="role" value="管理者">
+          <label for="roleManager">管理者</label>
+        </div>
+        <div class="choice-item">
+          <input type="radio" id="roleMarketing" name="role" value="行銷">
+          <label for="roleMarketing">行銷</label>
+        </div>
+        <div class="choice-item">
+          <input type="radio" id="roleOther" name="role" value="其他">
+          <label for="roleOther">其他</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>請選擇您的學習期待（可複選）</label>
+      <div class="choice-group">
+        <div class="choice-item">
+          <input type="checkbox" id="expectAI" name="expect" value="提高 AI 應用能力">
+          <label for="expectAI">提高 AI 應用能力</label>
+        </div>
+        <div class="choice-item">
+          <input type="checkbox" id="expectAutomation" name="expect" value="學習自動化技巧">
+          <label for="expectAutomation">學習自動化技巧</label>
+        </div>
+        <div class="choice-item">
+          <input type="checkbox" id="expectProductivity" name="expect" value="提高生產力">
+          <label for="expectProductivity">提高生產力</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>請自評您的 AI 了解程度（1～5，1為完全不了解，5為非常了解）</label>
+      <div class="scale-group">
+        <div class="scale-item">
+          <input type="radio" id="aiLevel1" name="aiLevel" value="1" required>
+          <label for="aiLevel1">1</label>
+        </div>
+        <div class="scale-item">
+          <input type="radio" id="aiLevel2" name="aiLevel" value="2">
+          <label for="aiLevel2">2</label>
+        </div>
+        <div class="scale-item">
+          <input type="radio" id="aiLevel3" name="aiLevel" value="3">
+          <label for="aiLevel3">3</label>
+        </div>
+        <div class="scale-item">
+          <input type="radio" id="aiLevel4" name="aiLevel" value="4">
+          <label for="aiLevel4">4</label>
+        </div>
+        <div class="scale-item">
+          <input type="radio" id="aiLevel5" name="aiLevel" value="5">
+          <label for="aiLevel5">5</label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">送出問卷</button>
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    document.getElementById('aiForm').addEventListener('submit', function(event) {
+      // 阻止表單的預設提交行為，這樣頁面就不會重新載入
+      event.preventDefault();
+
+      // 獲取表單元素的值
+      const name = document.getElementById('name').value;
+      
+      // 獲取選定的職位 (radio button)
+      const roleElement = document.querySelector('input[name="role"]:checked');
+      const role = roleElement ? roleElement.value : '未選擇';
+
+      // 獲取所有選定的學習期待 (checkboxes)
+      const expectElements = document.querySelectorAll('input[name="expect"]:checked');
+      const expects = Array.from(expectElements).map(el => el.value);
+      const expectsText = expects.length > 0 ? expects.join('、') : '未選擇';
+
+      // 獲取選定的 AI 了解程度 (radio button)
+      const aiLevelElement = document.querySelector('input[name="aiLevel"]:checked');
+      const aiLevel = aiLevelElement ? aiLevelElement.value : '未選擇';
+
+      // 顯示結果
+      const resultBox = document.getElementById('result');
+      resultBox.innerHTML = `
+        <h3>您的問卷結果</h3>
+        <p><strong>姓名：</strong> ${name || '未填寫'}</p>
+        <p><strong>職位：</strong> ${role}</p>
+        <p><strong>學習期待：</strong> ${expectsText}</p>
+        <p><strong>AI 了解程度：</strong> ${aiLevel}</p>
+      `;
+      // 顯示結果區塊
+      resultBox.style.display = 'block';
+
+      // (可選) 讓頁面滾動到結果區塊
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  </script>
+
+</body>
+</html>
